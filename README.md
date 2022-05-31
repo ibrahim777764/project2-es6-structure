@@ -1,4 +1,5 @@
-"# To-Do-list-list-structure" 
+
+![](https://img.shields.io/badge/Microverse-blueviolet)
 
 # To Do list
 
@@ -16,6 +17,7 @@ This is built using ES6 and Webpack!
 - Git & Github
 
 
+[Live Demo Link](https://ibrahim777764.github.io/project2-es6-structure/)
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
