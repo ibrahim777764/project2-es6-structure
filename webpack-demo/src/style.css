@@ -1,0 +1,110 @@
+h1 {
+  text-align: center;
+}
+
+section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  margin: 0;
+  padding: 2%;
+  background-color: white;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todolist-container {
+  width: 100%;
+  background-color: whitesmoke;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 2px;
+  box-shadow: 1px 1px 5px gray;
+}
+
+.input-icon {
+  width: 100%;
+  margin-bottom: 1px;
+  background-color: white;
+}
+
+.icon {
+  width: 15px;
+  padding-left: 5%;
+  cursor: pointer;
+}
+
+.fa:hover {
+  cursor: move;
+}
+
+.icon1 {
+  float: right;
+  color: rgb(142, 147, 151);
+  cursor: pointer;
+  font-size: medium;
+}
+
+.task {
+  display: flex;
+  padding: 3%;
+  background-color: white;
+}
+
+.todo-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: whitesmoke;
+  row-gap: 2px;
+}
+
+.todo-input {
+  width: 85%;
+  border: none;
+  padding: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+
+input::placeholder {
+  font-style: italic;
+}
+
+.task-check {
+  margin-right: 2%;
+}
+
+.list {
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+
+.clear-container {
+  text-align: center;
+}
+
+.clearer {
+  padding: 2%;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: lighter;
+}
