@@ -6,7 +6,7 @@ export function add(list) {
   saveLocal(list);
 }
 
-export function updateIndex(list) {
+export function updateIndex(list) 
   let i = 1;
   list.forEach((elem) => {
     elem.index = i;
