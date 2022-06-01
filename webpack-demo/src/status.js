@@ -7,5 +7,5 @@ export function status(elem, list) {
       task.isCompleted = !task.isCompleted;
     }
   });
-  saveLocal(list)
+  saveLocal(list);
 }
