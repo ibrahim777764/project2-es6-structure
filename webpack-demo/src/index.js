@@ -1,19 +1,73 @@
-// import _ from 'lodash';
-// import printMe from './print.js';
+import * as task from './populate.js';
+import * as stat from './status.js';
 import './style.css';
 
-const todo = [
-  { description: 'Set up a new project with webpack', isCompleted: false, index: 0 },
-  { description: 'Set up a new project with webpack', isCompleted: false, index: 1 },
-  { description: 'Create an index.js file', isCompleted: false, index: 2 },
-  { description: 'Write a function to iterate over the tasks array and populate an HTML', isCompleted: false, index: 3 },
-];
+let list = [];
+const listEl = document.querySelector('ul');
 
 function todoList() {
-  let todoListContent = '';
-  todo.forEach((item) => {
-    todoListContent += `<li class="task"><input class="task-check" type="checkbox"><span class="list">${item.description}</span><i class='fa fa-ellipsis-v' style="margin-left:auto"></i></li>`;
+  if (window.localStorage.getItem('localTasks')) {
+    const localTasks = window.localStorage.getItem('localTasks');
+    list = JSON.parse(localTasks);
+  }
+  document.querySelector('.todo-list').innerHTML = '';
+  list.forEach((item) => {
+    const taskElement = document.createElement('li');
+    taskElement.classList.add('task');
+    if (item.isCompleted) {
+      taskElement.classList.add('completed');
+    }
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.classList.add('task-check');
+    checkbox.addEventListener('click', () => {
+      stat.status(item, list);
+      todoList();
+    });
+    checkbox.checked = item.isCompleted;
+    taskElement.appendChild(checkbox);
+    const taskText = document.createElement('input');
+    taskText.classList = 'task-text';
+    taskText.value = item.description;
+    taskText.addEventListener('change', () => {
+      if (taskText.value.length > 0) {
+        item.description = taskText.value;
+        stat.saveLocal(list);
+      }
+    });
+    taskElement.appendChild(taskText);
+
+    const dragIcon = document.createElement('button');
+    dragIcon.classList = 'far fa-trash-alt deleteBtn';
+    taskElement.appendChild(dragIcon);
+    taskElement.draggable = 'true';
+    document.querySelector('.todo-list').appendChild(taskElement);
   });
-  document.querySelector('.todo-list').innerHTML = todoListContent;
 }
+
+function removeItem(e) {
+  if (!e.target.classList.contains('deleteBtn')) {
+    return;
+  }
+  const btn = e.target;
+  list.forEach((task) => {
+    if (task.description === btn.parentElement.children[1].value) {
+      list.splice(list.indexOf(task), 1);
+    }
+  });
+  btn.closest('li').remove();
+  task.updateIndex(list);
+  stat.saveLocal(list);
+}
+
+listEl.addEventListener('click', removeItem);
 todoList();
+document.querySelector('#taskForm').addEventListener('submit', (event) => {
+  event.preventDefault();
+  task.add(list);
+  todoList();
+});
+document.querySelector('.clearer').addEventListener('click', () => {
+  task.removeDone(list);
+  todoList();
+});
