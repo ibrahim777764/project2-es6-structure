@@ -1,9 +1,12 @@
-import * as task from './populate.js';
-import * as stat from './status.js';
+import * as task from './status.js';
 import './style.css';
 
-let list = [];
-const listEl = document.querySelector('ul');
+let list = [
+  { description: 'Set up a new project with webpack', isCompleted: false, index: 0 },
+  { description: 'Set up a new project with webpack', isCompleted: false, index: 1 },
+  { description: 'Create an index.js file', isCompleted: false, index: 2 },
+  { description: 'Write a function to iterate over the tasks array and populate an HTML', isCompleted: false, index: 3 },
+];
 
 function todoList() {
   if (window.localStorage.getItem('localTasks')) {
@@ -21,7 +24,7 @@ function todoList() {
     checkbox.type = 'checkbox';
     checkbox.classList.add('task-check');
     checkbox.addEventListener('click', () => {
-      stat.status(item, list);
+      task.status(item, list);
       todoList();
     });
     checkbox.checked = item.isCompleted;
@@ -32,35 +35,18 @@ function todoList() {
     taskText.addEventListener('change', () => {
       if (taskText.value.length > 0) {
         item.description = taskText.value;
-        stat.saveLocal(list);
+        task.saveLocal(list);
       }
     });
     taskElement.appendChild(taskText);
-
-    const dragIcon = document.createElement('button');
-    dragIcon.classList = 'far fa-trash-alt deleteBtn';
+    const dragIcon = document.createElement('i');
+    dragIcon.classList = 'fas fa-ellipsis-v drag icon';
     taskElement.appendChild(dragIcon);
     taskElement.draggable = 'true';
     document.querySelector('.todo-list').appendChild(taskElement);
   });
 }
 
-function removeItem(e) {
-  if (!e.target.classList.contains('deleteBtn')) {
-    return;
-  }
-  const btn = e.target;
-  list.forEach((task) => {
-    if (task.description === btn.parentElement.children[1].value) {
-      list.splice(list.indexOf(task), 1);
-    }
-  });
-  btn.closest('li').remove();
-  task.updateIndex(list);
-  stat.saveLocal(list);
-}
-
-listEl.addEventListener('click', removeItem);
 todoList();
 document.querySelector('#taskForm').addEventListener('submit', (event) => {
   event.preventDefault();
