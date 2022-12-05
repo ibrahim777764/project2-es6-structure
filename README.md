@@ -17,7 +17,7 @@ This is built using ES6 and Webpack!
 - Git & Github
 
 
-[Live Demo Link](https://ibrahim777764.github.io/project2-es6-structure/)
+[Live Demo Link](https://gleeful-chebakia-0194a4.netlify.app/
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
